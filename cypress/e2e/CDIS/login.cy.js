@@ -5,7 +5,7 @@ describe('The user should be able to login', () => {
     cy.visit('')
   })
 
-  it('should be able to login successfully', () => {
+  it('should be able to login & logout successfully', () => {
     // username
     cy.get('.input-group > .form-control').type('superadmin')
 
@@ -15,6 +15,11 @@ describe('The user should be able to login', () => {
 
     // Login button
     cy.contains('Login').click()
+
+    // User menu
+    cy.get('[title="User Menu"]').click()
+    cy.contains('Logout').click()
+    cy.contains('Ok').click()
   })
 
 })
