@@ -11,10 +11,7 @@ describe('The user should be able to login', () => {
 
     // password
     cy.get('.password-input > .form-control').click()
-    cy.get('.password-input > .form-control').type('superadmin031819')
-
-    // Login button
-    cy.contains('Login').click()
+    cy.get('.password-input > .form-control').type('superadmin031819{enter}')
 
     // User menu
     cy.get('[title="User Menu"]').click()
