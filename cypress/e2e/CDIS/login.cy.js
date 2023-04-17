@@ -10,7 +10,6 @@ describe('The user should be able to login and logout successfully', () => {
     cy.get('.input-group > .form-control').type('superadmin')
 
     // password
-    cy.get('.password-input > .form-control').click()
     cy.get('.password-input-addon').should('not.be.checked')
     cy.get('.password-input > .form-control').type('superadmin031819{enter}', {force: true})
 
