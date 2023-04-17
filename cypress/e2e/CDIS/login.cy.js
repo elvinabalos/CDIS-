@@ -11,12 +11,14 @@ describe('The user should be able to login', () => {
 
     // password
     cy.get('.password-input > .form-control').click()
+    cy.get('.password-input-addon').should('not.be.checked')
     cy.get('.password-input > .form-control').type('superadmin031819{enter}')
 
-    // User menu
-    cy.get('[title="User Menu"]').click()
+    // user menu
+    cy.get('[title="User Menu"]').click().contains('bonfire-administrator')
+    cy.location('href').should('eq', 'http://localhost/control-panel')
     cy.contains('Logout').click()
     cy.contains('Ok').click()
+    cy.location('href').should('eq', 'http://localhost/')
   })
-
 })
