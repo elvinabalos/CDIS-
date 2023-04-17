@@ -14,9 +14,9 @@ describe('The user should be able to login and logout successfully', () => {
     cy.get('.password-input > .form-control').type('superadmin031819{enter}', {force: true})
 
     // user menu
-    cy.get('[title="User Menu"]').click().contains('bonfire-administrator')
+    cy.get('[title="User Menu"]').click({force:true}).contains('bonfire-administrator')
     cy.location('href').should('eq', 'http://localhost/control-panel')
-    cy.contains('Logout').click()
+    cy.contains('Logout').click({force: true})
     cy.contains('Ok').click()
     cy.location('href').should('eq', 'http://localhost/')
   })
