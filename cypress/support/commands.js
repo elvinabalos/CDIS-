@@ -10,7 +10,20 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (username, password) => { 
+    cy.session([username, password], () => {
+        cy.visit('')
+        cy.get('.input-group > .form-control')
+                .type(`${username}`)    
+        cy.get('.password-input > .form-control')
+                .type(`${password}`, {force: true})       
+        cy.get('.btn').should('have.text', 'Login').click()    
+    }, 
+    {
+        cacheAcrossSpecs: true
+    }
+    )
+})
 //
 //
 // -- This is a child command --

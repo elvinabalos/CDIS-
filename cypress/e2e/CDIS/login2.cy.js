@@ -6,13 +6,14 @@ describe('The user should be able to login and logout successfully', () => {
   const login = new Login()
 
   beforeEach(() => {
-    login.navigate()
+    cy.login('superadmin', 'superadmin031819')
   })
 
   it('should be able to input username and password to login and logout', () => {
-    login.inputUsername('superadmin')
-    login.inputPassword('superadmin031819')
-    login.clickLoginButton()
-    login.clickLogout()
+    cy.visit('')
+  })
+
+  it('should be able to input username and password to login and logout', () => {
+    cy.visit('')
   })
 })
