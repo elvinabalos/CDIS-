@@ -1,23 +1,23 @@
 /// <reference types="cypress" />
 
+import { LoginPage } from "../../page-objects/login"
+
 describe('The user should be able to login and logout successfully', () => {
+  const loginPage = new LoginPage()
+
   beforeEach(() => {
-    cy.visit('')
+    loginPage.navigate()
   })
 
   it('should be able to input username and password to login and logout', () => {
     // username
-    cy.get('.input-group > .form-control').type('superadmin')
+    loginPage.inputUsername('superadmin')
+    console.log(loginPage.inputUsername)
 
     // password
-    cy.get('.password-input-addon').should('not.be.checked')
-    cy.get('.password-input > .form-control').type('superadmin031819{enter}', {force: true})
+    loginPage.inputPassword('superadmin031819')
 
     // user menu
-    cy.get('[title="User Menu"]').click({force:true}).contains('bonfire-administrator')
-    cy.location('href').should('eq', 'http://localhost/control-panel')
-    cy.contains('Logout').click({force: true})
-    cy.contains('Ok').click()
-    cy.location('href').should('eq', 'http://localhost/')
+    loginPage.clickLogout()
   })
 })
