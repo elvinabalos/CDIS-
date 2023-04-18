@@ -5,7 +5,10 @@ module.exports = defineConfig({
     // setupNodeEvents(on, config) {
     //   // implement node event listeners here
     // },
-    baseUrl: 'http://localhost/',
+    baseUrl: 'http://localhost/', // local server
+    // baseUrl: 'https://ebc-test.bonfiretechsol.com/' // ebc test server
+    // baseUrl: 'https://ebc.mycdis.com/' // ebc live server
+
   },
 });
 
