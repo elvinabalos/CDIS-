@@ -11,12 +11,16 @@ export class LoginPage {
     inputPassword(password) {
         this.validateCheckbox()
         cy.get('.password-input > .form-control')
-          .type(`${password}{enter}`, {force: true})
+          .type(`${password}`, {force: true})
     }
 
     validateCheckbox() {
        cy.get('.password-input-addon')
          .should('not.be.checked')
+    }
+
+    clickLoginButton() {
+      cy.get('.btn').should('have.text', 'Login').click()
     }
 
     clickLogout() {

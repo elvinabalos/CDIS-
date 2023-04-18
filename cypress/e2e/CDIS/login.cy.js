@@ -10,14 +10,9 @@ describe('The user should be able to login and logout successfully', () => {
   })
 
   it('should be able to input username and password to login and logout', () => {
-    // username
     loginPage.inputUsername('superadmin')
-    console.log(loginPage.inputUsername)
-
-    // password
     loginPage.inputPassword('superadmin031819')
-
-    // user menu
+    loginPage.clickLoginButton()
     loginPage.clickLogout()
   })
 })
