@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 export class Login {
-
   navigate() {
     cy.visit('')
   }
@@ -26,10 +25,14 @@ export class Login {
   }
 
   clickLogout() {
-    cy.get('[title="User Menu"]').click({force:true}).contains('bonfire-administrator')
+    cy.get('[title="User Menu"]', {timeout: 5000}).click({force:true}).contains('bonfire-administrator')
     cy.location('href').should('eq', `${Cypress.config().baseUrl}control-panel`)
     cy.contains('Logout').click({force: true})
     cy.contains('Ok').click()
     cy.location('href').should('eq', `${Cypress.config().baseUrl}`)
+  }
+  
+  validationErrorMessage() {
+    cy.get('.message').should('include.text', 'These credentials do not match our records.')
   }
 }
