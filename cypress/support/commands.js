@@ -1,15 +1,3 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
 Cypress.Commands.add('login', (username, password) => { 
     cy.session([username, password], () => {
         cy.visit('')
@@ -17,22 +5,55 @@ Cypress.Commands.add('login', (username, password) => {
                 .type(`${username}`)    
         cy.get('.password-input > .form-control')
                 .type(`${password}`, {force: true})       
-        cy.get('.btn').should('have.text', 'Login').click()    
+        cy.get('.btn').should('have.text', 'Login').click()
+        cy.location('pathname')
+          .should('eq','/control-panel')       
     }, 
     {
         cacheAcrossSpecs: true
     }
     )
 })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('save', (save_btn, module_name) => { 
+  // Save button
+	cy.get(`${save_btn}`).click()
+	cy.get('.dialog-box-message__sub-text > span')
+	  .should('contain', `${module_name} successfully added.`)
+	cy.get('.dialog-box-footer > .button', {force: true})
+    .click()  
+})
+
+Cypress.Commands.add('search', (bank_name) => {
+  // Search
+  cy.get('.top > :nth-child(1) > .dropdown-button').click()
+	cy.get(':nth-child(1) > :nth-child(2) > .form-control').type(`${bank_name}`)
+	cy.get('.d-flex > .btn').click()
+})
+
+Cypress.Commands.add('delete', (module_name)=> {
+  // Delete
+  cy.get('[rowindex="0"] > :nth-child(7)').click()
+	cy.get('.dialog-box-container')
+	  .should('contain', 'Once deleted, you will not be able to recover this data again!')
+	  .contains('Ok')  
+	  .click()
+	cy.get('.dialog-box-container')
+	  .should('contain', `${module_name} successfully deleted.`)
+	  .contains('Ok')
+	  .click()   
+})
+
+Cypress.Commands.add('update', (module_name) => {
+  // Update
+  cy.get('[rowindex="0"] > :nth-child(6)')
+    .click()
+  cy.get('[rowindex="0"] > :nth-child(4) > .datatable-cell-content > .form-control')
+    .type('Update Description', {force: true})
+  cy.get('[rowindex="0"] > :nth-child(6)')
+    .click()
+  cy.get('.dialog-box-container')
+    .should('contain', `${module_name} successfully updated.`)
+    .contains('Ok')
+    .click()  
+})

@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { Login } from "../../page-objects/login"
+// import { Login } from "../../page-objects/login"
 
 describe('The user should be able to login and logout successfully', () => {
-  const login = new Login()
+  // const login = new Login()
 
   beforeEach(() => {
     cy.login('superadmin', 'superadmin031819')
