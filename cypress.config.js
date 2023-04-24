@@ -7,9 +7,10 @@ module.exports = defineConfig({
     // },
     baseUrl: 'http://localhost/', // local server
     // baseUrl: 'https://ebc-test.bonfiretechsol.com/' // ebc test server
-    // baseUrl: 'https://ebc.mycdis.com/' // ebc live server
+    
 
   },
+  // experimentalSessionandOrigin: true
 });
 
 // const { defineConfig } = require('cypress')
