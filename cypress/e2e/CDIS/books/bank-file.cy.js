@@ -23,6 +23,8 @@ describe('The user should be able to create, update, delete, and search the bank
     // Save button  
     cy.save(save_btn, module_name)
 
+	bankfile.validateClearFields(bank_name, description)
+
 	// Validation for duplications
     bankfile.validateDuplicates(bank_name, description, save_btn)
 

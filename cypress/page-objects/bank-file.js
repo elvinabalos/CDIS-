@@ -23,6 +23,19 @@ export class bankFile {
 		this.selectStatus()
 	}
 
+	validateClearFields(bank_name, description) {
+		this.inputBankName(bank_name)
+		this.inputDescription(description)
+		// Clear button
+		cy.get('.datatable-row--add > :nth-child(7)', {force: true}).click()
+		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control')
+		  .should('be.empty')
+		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .form-control')
+		  .should('be.empty')
+		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .form-control')
+		  .should('be.empty')    
+	}
+
 	validateDuplicates(bank_name, description, save_btn) {
 		// Validation for duplications
 		this.inputBankName(bank_name)
