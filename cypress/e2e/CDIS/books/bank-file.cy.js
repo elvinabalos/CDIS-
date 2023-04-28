@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 import { bankFile} from "../../../page-objects/bank-file"
 
 describe('The user should be able to create, update, delete, and search the bank file', () => {
@@ -26,12 +24,12 @@ describe('The user should be able to create, update, delete, and search the bank
     cy.save(save_btn, module_name)
 
 	// Validation for duplications
-    bankfile.validateDuplicates(code, bank_name, description, save_btn)
+    bankfile.validateDuplicates(bank_name, description, save_btn)
 
     // Validation for required field/s
     bankfile.validateRequired(save_btn)
 
-	// // Search
+	// Search
     cy.search(bank_name)
 
     // Update

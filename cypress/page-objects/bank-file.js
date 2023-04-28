@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 export class bankFile {
 
 	inputCode(code) {
@@ -24,17 +23,16 @@ export class bankFile {
 		this.selectStatus()
 	}
 
-	validateDuplicates(code, bank_name, description, save_btn) {
-	// Validation for duplications
-	this.fillBankFile(code, bank_name, description)
-    // Save button  
-    cy.get(`${save_btn}`).click()
-    cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
-      .should('have.text', 'Code has already been taken.')
-    cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-      .should('have.text', 'Bank Name has already been taken.')
-    cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-      .should('have.text', 'Description has already been taken.')
+	validateDuplicates(bank_name, description, save_btn) {
+		// Validation for duplications
+		this.inputBankName(bank_name)
+		this.inputDescription(description)
+		// Save button  
+		cy.get(`${save_btn}`).click()
+		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
+		.should('have.text', 'Bank Name has already been taken.')
+		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
+		.should('have.text', 'Description has already been taken.')
 	}
 
 	validateRequired(save_btn) {
