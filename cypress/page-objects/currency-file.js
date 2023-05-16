@@ -1,0 +1,74 @@
+let code = '100'
+let currency = 'New Currency 1'
+let description = 'Description 1'
+let save_btn = '.row-add'
+let module_name = 'Currency File'
+let codeField = '.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control'
+let currencyField = '.datatable-row--add > :nth-child(3) > .datatable-cell-content > .form-control'
+let descriptionField = '.datatable-row--add > :nth-child(4) > .datatable-cell-content > .form-control'
+let statusField = ':nth-child(5) > .form-control'
+let inactiveStatus = 1
+let activeStatus = 0
+
+export class currencyFile {
+	addCurrencyFile() {
+		// code
+		cy.inputField(codeField, code)
+		// currency
+		cy.inputField(currencyField, currency)
+		// description
+		cy.inputField(descriptionField, description)
+		// status
+		cy.selectStatus(statusField, inactiveStatus)
+		cy.save(save_btn, module_name)
+	}
+
+	searchCurrency() {
+		cy.search(currency)
+	}
+
+	updateCurrency() {
+		cy.update(module_name)
+	}
+
+	deleteCurrency() {
+		this.searchCurrency()
+		cy.delete(module_name)
+	}
+
+	validateClearFields(bank_name, description) {
+		this.inputBankName(bank_name)
+		this.inputDescription(description)
+		// Clear button
+		cy.get('.datatable-row--add > :nth-child(7)', {force: true}).click()
+		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control')
+		  .should('be.empty')
+		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .form-control')
+		  .should('be.empty')
+		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .form-control')
+		  .should('be.empty')
+	}
+
+	validateDuplicates(bank_name, description, save_btn) {
+		// Validation for duplications
+		this.inputBankName(bank_name)
+		this.inputDescription(description)
+		// Save button
+		cy.get(`${save_btn}`).click()
+		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
+		.should('have.text', 'Bank Name has already been taken.')
+		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
+		.should('have.text', 'Description has already been taken.')
+	}
+
+	validateRequired(save_btn) {
+		cy.reload()
+		cy.get(`${save_btn}`).click()
+		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
+		  .should('have.text', 'Code is required.')
+		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
+	      .should('have.text', 'Bank Name is required.')
+		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
+	      .should('have.text', 'Description is required.')
+	}
+}
