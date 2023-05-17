@@ -56,25 +56,28 @@ export class currencyFile {
 		  .should('be.empty')
 	}
 
-	validateDuplicates(currency, description, save_btn) {
+	validateDuplicates() {
 		// Validation for duplications
-		this.inputBankName(bank_name)
-		this.inputDescription(description)
+		cy.inputField(codeField, code)
+		cy.inputField(currencyField, currency)
+		cy.inputField(descriptionField, description)
 		// Save button
 		cy.get(`${save_btn}`).click()
+		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
+			.should('have.text', `Code has already been taken.`)
 		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-		.should('have.text', 'Bank Name has already been taken.')
+			.should('have.text', `Currency has already been taken.`)
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-		.should('have.text', 'Description has already been taken.')
+			.should('have.text', 'Description has already been taken.')
 	}
 
-	validateRequired(save_btn) {
+	validateRequired() {
 		cy.reload()
 		cy.get(`${save_btn}`).click()
 		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
 		  .should('have.text', 'Code is required.')
 		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-	      .should('have.text', 'Bank Name is required.')
+	      .should('have.text', 'Currency is required.')
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
 	      .should('have.text', 'Description is required.')
 	}

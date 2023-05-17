@@ -1,8 +1,11 @@
+/// <reference types="Cypress" />
+//// <reference types="@cypress/xpath" />
+
 Cypress.Commands.add('login', (username, password) => { 
     cy.session([username, password], () => {
         cy.visit('')
         cy.get('.input-group > .form-control')
-                .type(`${username}`)    
+                .type(`${username}`, {force: true})    
         cy.get('.password-input > .form-control')
                 .type(`${password}`, {force: true})       
         cy.get('.btn').should('have.text', 'Login').click()
@@ -24,10 +27,10 @@ Cypress.Commands.add('save', (save_btn, module_name) => {
     .click()  
 })
 
-Cypress.Commands.add('search', (bank_name) => {
+Cypress.Commands.add('search', (name) => {
   // Search
   cy.get('.top > :nth-child(1) > .dropdown-button').click()
-	cy.get(':nth-child(1) > :nth-child(2) > .form-control').type(`${bank_name}`)
+	cy.get(':nth-child(1) > :nth-child(2) > .form-control').type(`${name}`)
 	cy.get('.d-flex > .btn').click()
 })
 
@@ -56,4 +59,18 @@ Cypress.Commands.add('update', (module_name) => {
     .should('contain', `${module_name} successfully updated.`)
     .contains('Ok')
     .click()  
+})
+
+Cypress.Commands.add('inputField', (selector, value) => {
+  // Input Field
+  cy.get(selector, {force: true}).type(value)
+})
+
+Cypress.Commands.add('selectStatus', (selector, value) => {
+  cy.get(selector).select(value)  
+})
+
+Cypress.Commands.add('validateEmptyResult', (selector, msg) => {
+  cy.search()   
+  cy.contains(selector, msg)
 })
