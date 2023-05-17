@@ -2,6 +2,7 @@ let code = '100'
 let currency = 'New Currency 1'
 let description = 'Description 1'
 let save_btn = '.row-add'
+let clearBtn = '.datatable-row--add > :nth-child(7)'
 let module_name = 'Currency File'
 let codeField = '.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control'
 let currencyField = '.datatable-row--add > :nth-child(3) > .datatable-cell-content > .form-control'
@@ -9,6 +10,8 @@ let descriptionField = '.datatable-row--add > :nth-child(4) > .datatable-cell-co
 let statusField = ':nth-child(5) > .form-control'
 let inactiveStatus = 1
 let activeStatus = 0
+let emptyResultModal = '.no-data-available--inline > td'
+let noDataAvailableToShow = 'No data available to show'
 
 export class currencyFile {
 	addCurrencyFile() {
@@ -36,20 +39,24 @@ export class currencyFile {
 		cy.delete(module_name)
 	}
 
-	validateClearFields(bank_name, description) {
-		this.inputBankName(bank_name)
-		this.inputDescription(description)
-		// Clear button
-		cy.get('.datatable-row--add > :nth-child(7)', {force: true}).click()
-		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control')
+	checkEmptyResult() {
+		cy.validateEmptyResult(emptyResultModal, noDataAvailableToShow)
+	}
+
+	validateClearFields() {
+		cy.inputField(codeField, code)
+		cy.inputField(currencyField, currency)
+		cy.inputField(descriptionField, description)
+		cy.get(clearBtn, {force: true}).click()
+		cy.get(codeField)
 		  .should('be.empty')
-		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .form-control')
+		cy.get(currencyField)
 		  .should('be.empty')
-		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .form-control')
+		cy.get(descriptionField)
 		  .should('be.empty')
 	}
 
-	validateDuplicates(bank_name, description, save_btn) {
+	validateDuplicates(currency, description, save_btn) {
 		// Validation for duplications
 		this.inputBankName(bank_name)
 		this.inputDescription(description)
