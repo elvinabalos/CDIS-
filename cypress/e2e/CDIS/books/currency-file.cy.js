@@ -19,6 +19,14 @@ describe('The user should be able to create, update, delete, and search the curr
     currencyfile.validateClearFields()
   })
 
+  it('Should be able to check validate duplicates currency file', () => {
+    currencyfile.validateDuplicates()
+  })
+
+  it('Should be able to check validate required fields currency file', () => {
+    currencyfile.validateRequired()
+  })
+
   it('Should be able to update currency file', () => {
     currencyfile.searchCurrency()  
     currencyfile.updateCurrency()
