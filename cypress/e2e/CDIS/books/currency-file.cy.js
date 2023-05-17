@@ -15,6 +15,10 @@ describe('The user should be able to create, update, delete, and search the curr
     currencyfile.addCurrencyFile()
   })
 
+  it('Should be able to validate clear code, currenct and description fields', () => {
+    currencyfile.validateClearFields()
+  })
+
   it('Should be able to update currency file', () => {
     currencyfile.searchCurrency()  
     currencyfile.updateCurrency()
@@ -28,9 +32,7 @@ describe('The user should be able to create, update, delete, and search the curr
     currencyfile.deleteCurrency()  
   })
 
-  it('Should be able to search currency file', () => {
-    currencyfile.searchCurrency()   
-    cy.get('.no-data-available--inline > td')
-      .should('have.text', 'No data available to show')
+  it('Should be able to check if no data available to show the currency file', () => {
+    currencyfile.checkEmptyResult()
   })
 })
