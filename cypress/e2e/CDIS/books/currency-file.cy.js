@@ -1,6 +1,6 @@
 import { currencyFile } from "../../../page-objects/currency-file"
 
-describe('The user should be able to create, update, delete, and search the currency file', () => {
+describe('The user should be able to validate clear fields, required fields, duplicates, no data available to show, create, update, delete, and search the currency file', () => {
   const currencyfile = new currencyFile()
   const username = 'superadmin'
   const password = 'superadmin031819'
