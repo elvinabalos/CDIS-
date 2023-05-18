@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-//// <reference types="@cypress/xpath" />
+/// <reference types="@cypress/xpath" />
 
 Cypress.Commands.add('login', (username, password) => { 
     cy.session([username, password], () => {
@@ -71,6 +71,10 @@ Cypress.Commands.add('selectStatus', (selector, value) => {
 })
 
 Cypress.Commands.add('validateEmptyResult', (selector, msg) => {
-  cy.search()   
   cy.contains(selector, msg)
+})
+
+Cypress.Commands.add('selectData', (selector, name) => {
+  cy.get(selector).click()
+  cy.get(name).click()
 })
