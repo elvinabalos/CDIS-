@@ -11,24 +11,21 @@ describe('The user should be able to validate clear fields, required fields, dup
 
   })
 
-  it.only('Should be able to create petty cash', () => {
+  it('Should be able to create petty cash', () => {
     pettycash.addPettyCash()
-    
-		// cy.contains('EBC STA ANA')
-    // cy.get('.vm-select-dropdown__item.hover', {force: true}).click()
-    // cy.get('.datatable-row--add > :nth-child(5) > .datatable-cell-content > .vm-select > .vm-input > .vm-input__inner')
-    // cy.get('.hover').click()
   })
 
- /*
+ 
   it('Should be able to validate clear code, currenct and description fields', () => {
-    currencyfile.validateClearFields()
+    pettycash.validateClearFields()
   })
+
 
   it('Should be able to check validate duplicates petty cash', () => {
-    currencyfile.validateDuplicates()
+    pettycash.validateDuplicates()
   })
 
+/*
   it('Should be able to check validate required fields petty cash', () => {
     currencyfile.validateRequired()
   })
