@@ -17,7 +17,7 @@ let currencyData = '[style="min-width: 291px; position: absolute; top: 197px; le
 
 export class pettyCash {
 	addPettyCash() {
-		cy.get(custodianField).type(custodian_name, {force: true})
+		cy.inputField(custodianField, custodian_name)
 		this.selectBranch()
 		this.selectCurrency()
 		cy.selectStatus(statusField, inactiveStatus)
@@ -50,31 +50,25 @@ export class pettyCash {
 	}
 
 	validateClearFields() {
-		cy.inputField(codeField, code)
-		cy.inputField(currencyField, currency)
-		cy.inputField(descriptionField, description)
+		cy.inputField(custodianField, custodian_name)
+		this.selectBranch()
+		this.selectCurrency()
 		cy.get(clearBtn, {force: true}).click()
-		cy.get(codeField)
+		cy.get(custodianField)
+		  .should('be.empty')
+		cy.get(branchField)
 		  .should('be.empty')
 		cy.get(currencyField)
-		  .should('be.empty')
-		cy.get(descriptionField)
 		  .should('be.empty')
 	}
 
 	validateDuplicates() {
-		// Validation for duplications
-		cy.inputField(codeField, code)
-		cy.inputField(currencyField, currency)
-		cy.inputField(descriptionField, description)
-		// Save button
+		cy.inputField(custodianField, custodian_name)
+		this.selectBranch()
+		this.selectCurrency()
 		cy.get(`${save_btn}`).click()
-		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
-			.should('have.text', `Code has already been taken.`)
-		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-			.should('have.text', `Currency has already been taken.`)
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Description has already been taken.')
+		  .should('have.text', `Custodian Name has already been taken.`)
 	}
 
 	validateRequired() {
