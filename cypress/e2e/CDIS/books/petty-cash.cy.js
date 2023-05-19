@@ -25,11 +25,11 @@ describe('The user should be able to validate clear fields, required fields, dup
     pettycash.validateDuplicates()
   })
 
-/*
-  it('Should be able to check validate required fields petty cash', () => {
-    currencyfile.validateRequired()
-  })
 
+  it('Should be able to check validate required fields petty cash', () => {
+    pettycash.validateRequired()
+  })
+/*
   it('Should be able to update petty cash', () => {
     currencyfile.searchCurrency()  
     currencyfile.updateCurrency()
