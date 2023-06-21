@@ -29,23 +29,22 @@ describe('The user should be able to validate clear fields, required fields, dup
   it('Should be able to check validate required fields petty cash', () => {
     pettycash.validateRequired()
   })
-/*
+
   it('Should be able to update petty cash', () => {
-    currencyfile.searchCurrency()  
-    currencyfile.updateCurrency()
+    pettycash.searchKeyword()  
+    pettycash.updatePettyCash()
   })
 
   it('Should be able to search petty cash', () => {
-    currencyfile.searchCurrency()   
+    pettycash.searchKeyword()    
   })
 
   it('Should be able to delete petty cash', () => {
-    currencyfile.deleteCurrency()  
+    pettycash.deletePettyCash()  
   })
 
   it('Should be able to check if no data available to show the petty cash', () => {
-    currencyfile.checkEmptyResult()
+    pettycash.checkEmptyResult()
   })
 
-  */
 })
