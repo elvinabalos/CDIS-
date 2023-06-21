@@ -1,6 +1,7 @@
 let code = '100'
 let custodian_name = 'Custodian 1'
 let save_btn = '.row-add'
+let delete_icon = '[rowindex="0"] > :nth-child(8)'
 let clearBtn = '.datatable-row--add > :nth-child(7)'
 let module_name = 'Petty Cash Custodian'
 let codeField = '.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control'
@@ -32,17 +33,27 @@ export class pettyCash {
 		cy.selectData(currencyField, currencyData)
 	}
 
-	searchCurrency() {
-		cy.search(currency)
+	searchKeyword() {
+		cy.search(custodian_name)
 	}
 
-	updateCurrency() {
-		cy.update(module_name)
+	updatePettyCash() {
+		// cy.update(module_name)
+		cy.get('[rowindex="0"] > :nth-child(7)')
+		  .click()
+	  	cy.get('[rowindex="0"] > :nth-child(4) > .datatable-cell-content > .form-control')
+		  .type('Update Description', {force: true})
+		cy.get('[rowindex="0"] > :nth-child(7)')
+			.click()
+		cy.get('.dialog-box-container')
+		  .should('contain', `${module_name} successfully updated.`)
+		  .contains('Ok')
+		  .click()  
 	}
 
-	deleteCurrency() {
-		this.searchCurrency()
-		cy.delete(module_name)
+	deletePettyCash() {
+		this.searchKeyword()
+		cy.delete(delete_icon, module_name)
 	}
 
 	checkEmptyResult() {
@@ -77,8 +88,10 @@ export class pettyCash {
 		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
 		  .should('have.text', 'Code is required.')
 		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-	      .should('have.text', 'Currency is required.')
+	      .should('have.text', 'Branch is required.')
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-	      .should('have.text', 'Description is required.')
+	      .should('have.text', 'Custodian Name is required.')
+		cy.get('.datatable-row--add > :nth-child(5) > .datatable-cell-content > .error-message')
+	      .should('have.text', 'Currency is required.')  
 	}
 }
