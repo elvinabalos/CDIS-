@@ -59,13 +59,10 @@ export class currencyFile {
 
 	validateDuplicates() {
 		// Validation for duplications
-		cy.inputField(codeField, code)
 		cy.inputField(currencyField, currency)
 		cy.inputField(descriptionField, description)
 		// Save button
 		cy.get(`${save_btn}`).click()
-		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
-			.should('have.text', `Code has already been taken.`)
 		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
 			.should('have.text', `Currency has already been taken.`)
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')

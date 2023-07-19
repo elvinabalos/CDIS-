@@ -19,7 +19,7 @@ describe('The user should be able to validate clear fields, required fields, dup
     currencyfile.validateClearFields()
   })
 
-  it('Should be able to check validate duplicates currency file', () => {
+  it('Should be able to check validate duplicates currency and description fields', () => {
     currencyfile.validateDuplicates()
   })
 
