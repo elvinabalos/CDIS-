@@ -30,13 +30,13 @@ Cypress.Commands.add('save', (save_btn, module_name) => {
 Cypress.Commands.add('search', (name) => {
   // Search
   cy.get('.top > :nth-child(1) > .dropdown-button').click()
-	cy.get(':nth-child(1) > :nth-child(2) > .form-control').type(`${name}`)
+	cy.get(':nth-child(1) > :nth-child(2) > .form-control').clear().type(`${name}`)
 	cy.get('.d-flex > .btn').click()
 })
 
-Cypress.Commands.add('delete', (module_name)=> {
+Cypress.Commands.add('delete', (delete_icon, module_name)=> {
   // Delete
-  cy.get('[rowindex="0"] > :nth-child(7)').click()
+  cy.get(delete_icon).click()
 	cy.get('.dialog-box-container')
 	  .should('contain', 'Once deleted, you will not be able to recover this data again!')
 	  .contains('Ok')  
@@ -63,7 +63,8 @@ Cypress.Commands.add('update', (module_name) => {
 
 Cypress.Commands.add('inputField', (selector, value) => {
   // Input Field
-  cy.get(selector, {force: true}).type(value)
+  cy.get(selector, {force: true})
+    .type(value)
 })
 
 Cypress.Commands.add('selectStatus', (selector, value) => {

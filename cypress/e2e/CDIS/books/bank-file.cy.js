@@ -4,40 +4,39 @@ describe('The user should be able to create, update, delete, and search the bank
   const bankfile = new bankFile()
   const username = 'superadmin'
   const password = 'superadmin031819'
-  let code = '100'
-  let bank_name = 'New Bank 1'
-  let description = 'Description 1'
-  let save_btn = '.row-add'
-  let module_name = 'Bank File'
+
 
   beforeEach(() => {
-	cy.login(username, password)
+    cy.login(username, password)
+    cy.visit('/bank-file')
   })
 
-  it('Should be able to create, update, delete, search, and validations for empty field and duplications', () => {
-	cy.visit('/bank-file')
+  it('Should be able to create bank file', () => {
+    bankfile.addBankFile()
+  })
 
-    // Fill in the code, bank name, and description
-	bankfile.fillBankFile(code, bank_name, description)
+  it('Should be able to validate clear code, currenct and description fields', () => {
+    bankfile.validateClearFields()
+  })
 
-    // Save button  
-    cy.save(save_btn, module_name)
+  it('Should be able to check validate duplicates bank name and description fields', () => {
+    bankfile.validateDuplicates()
+  })
 
-	bankfile.validateClearFields(bank_name, description)
+  it('Should be able to check validate required code, bank name, description fields', () => {
+    bankfile.validateRequired()
+  })  
 
-	// Validation for duplications
-    bankfile.validateDuplicates(bank_name, description, save_btn)
+  it('Should be able to update bank file', () => {
+    bankfile.searchKeyword()
+    bankfile.updateBankFile()
+  })  
 
-    // Validation for required field/s
-    bankfile.validateRequired(save_btn)
+  it('Should be able to search bank file', () => {
+    bankfile.searchKeyword()
+  })
 
-	// Search
-    cy.search(bank_name)
-
-    // Update
-    cy.update(module_name)
-
-	// Delete
-    cy.delete(module_name)
+  it('Should be able to delete bank file', () => {
+    bankfile.deleteBankFile()  
   })
 })
