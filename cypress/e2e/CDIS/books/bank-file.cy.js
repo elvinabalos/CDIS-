@@ -2,12 +2,16 @@ import { bankFile} from "../../../page-objects/bank-file"
 
 describe('The user should be able to create, update, delete, and search the bank file', () => {
   const bankfile = new bankFile()
-  const username = 'superadmin'
-  const password = 'superadmin031819'
-
+  
+  let data;
+  before(() => {
+    cy.fixture('credentials').then((Data) => {
+      data = Data
+    })
+  })
 
   beforeEach(() => {
-    cy.login(username, password)
+    cy.login(data.admin.username, data.admin.password)
     cy.visit('/bank-file')
   })
 

@@ -2,13 +2,17 @@ import { currencyFile } from "../../../page-objects/currency-file"
 
 describe('The user should be able to validate clear fields, required fields, duplicates, no data available to show, create, update, delete, and search the currency file', () => {
   const currencyfile = new currencyFile()
-  const username = 'superadmin'
-  const password = 'superadmin031819'
+
+  let data;
+  before(() => {
+    cy.fixture('credentials').then((Data) => {
+      data = Data
+    })
+  })
 
   beforeEach(() => {
-    cy.login(username, password)
+    cy.login(data.admin.username, data.admin.password)
     cy.visit('/currency-file')
-
   })
 
   it('Should be able to create currency file', () => {
