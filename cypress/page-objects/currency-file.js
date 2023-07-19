@@ -2,6 +2,7 @@ let code = '100'
 let currency = 'New Currency 1'
 let description = 'Description 1'
 let save_btn = '.row-add'
+let delete_icon = '[rowindex="0"] > :nth-child(7)'
 let clearBtn = '.datatable-row--add > :nth-child(7)'
 let module_name = 'Currency File'
 let codeField = '.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control'
@@ -36,7 +37,7 @@ export class currencyFile {
 
 	deleteCurrency() {
 		this.searchCurrency()
-		cy.delete(module_name)
+		cy.delete(delete_icon, module_name)
 	}
 
 	checkEmptyResult() {
