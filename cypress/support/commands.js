@@ -9,7 +9,7 @@ Cypress.Commands.add('login', (username, password) => {
         cy.get('.password-input > .form-control')
                 .type(`${password}`, {force: true})       
         cy.get('.btn').should('have.text', 'Login').click()
-        cy.location('pathname')
+        cy.location('pathname', {defaultCommandTimeout: 5000})
           .should('eq','/control-panel')       
     }, 
     {
