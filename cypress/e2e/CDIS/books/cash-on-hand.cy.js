@@ -23,9 +23,9 @@ describe('The user should be able to create, update, delete, and search the cash
     coh.validateClearFields()
   })
 
-  // it('Should be able to check validate duplicates bank name and description fields', () => {
-  //   bankfile.validateDuplicates()
-  // })
+  it.only('Should be able to check validate duplicates bank name and description fields', () => {
+    coh.validateDuplicates()
+  })
 
   // it('Should be able to check validate required code, bank name, description fields', () => {
   //   bankfile.validateRequired()

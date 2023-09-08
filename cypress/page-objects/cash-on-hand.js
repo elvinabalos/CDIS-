@@ -43,14 +43,11 @@ export class cashOnHand {
 
 	validateDuplicates() {
 		// Validation for duplications
-		cy.inputField(branc, bank_name)
-		cy.inputField(descField, description)
+		cy.inputField(positionField, position)
 		// Save button  
 		cy.get(`${save_btn}`).click()
-		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Bank Name has already been taken.')
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Description has already been taken.')
+		  .should('have.text', 'Position has already been taken.')
 	}
 
 	validateRequired() {
