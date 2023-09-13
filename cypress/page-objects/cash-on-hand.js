@@ -53,12 +53,14 @@ export class cashOnHand {
 	validateRequired() {
 		cy.reload()
 		cy.get(`${save_btn}`).click()
-		cy.get('.datatable-row--add > :nth-child(2) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Code is required.')
 		cy.get('.datatable-row--add > :nth-child(3) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Bank Name is required.')
+			.should('have.text', 'Branch is required.')
 		cy.get('.datatable-row--add > :nth-child(4) > .datatable-cell-content > .error-message')
-			.should('have.text', 'Description is required.')
+			.should('have.text', 'Position is required.')
+		cy.get('.datatable-row--add > :nth-child(5) > .datatable-cell-content > .error-message')
+			.should('have.text', 'Name is required.')
+		cy.get('.datatable-row--add > :nth-child(6) > .datatable-cell-content > .error-message')
+			.should('have.text', 'Currency is required.')	
 	}
 
 	addCashOnHand() {
