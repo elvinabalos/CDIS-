@@ -9,12 +9,11 @@ let currencyData = '[style="min-width: 291px; position: absolute; top: 197px; le
 let staAnaBranch = 'body > div.vm-select-dropdown > div > div.vm-select-dropdown__wrap.vm-scrollbar__wrap > ul > li:nth-child(2)'
 let save_btn = '.row-add'
 let clearBtn = '.datatable-row--add > :nth-child(9)'
-let editButton = '[rowindex="0"] > :nth-child(6)'
+let editButton = '[rowindex="0"] > :nth-child(8)'
 let delete_icon = '[rowindex="0"] > :nth-child(7)'
 let statusField = ':nth-child(7) > .form-control'
 let inactiveStatus = 1
 let codeField = '.datatable-row--add > :nth-child(2) > .datatable-cell-content > .form-control'
-let descField = '.datatable-row--add > :nth-child(4) > .datatable-cell-content > .form-control'
 
 export class cashOnHand {
 
@@ -81,14 +80,16 @@ export class cashOnHand {
 	}
 
   searchKeyword() {
-    cy.search(bank_name)
+    cy.search(name)
   }
 
-  updateBankFile() {
+  updateCashOnHand() {
 		cy.get(editButton)
 		  .click()
-	  	cy.get(descField)
-		  .type('Update Description', {force: true})
+		cy.get('[rowindex="0"] > :nth-child(4) > .datatable-cell-content > .form-control')
+		  .type('Update position')
+		cy.get('[rowindex="0"] > :nth-child(5) > .datatable-cell-content > .form-control')
+		  .type('name updated')  
 		cy.get(editButton)
 			.click()
 		cy.get('.dialog-box-container')
