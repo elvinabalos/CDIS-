@@ -76,6 +76,6 @@ Cypress.Commands.add('validateEmptyResult', (selector, msg) => {
 })
 
 Cypress.Commands.add('selectData', (selector, name) => {
-  cy.get(selector).click()
-  cy.get(name).click()
+  cy.get(selector, {force: true}).click()
+  cy.get(name,  {force: true}).click()
 })
