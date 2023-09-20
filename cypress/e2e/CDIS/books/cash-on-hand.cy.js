@@ -31,14 +31,14 @@ describe('The user should be able to create, update, delete, and search the cash
     coh.validateRequired()
   })  
 
-  it.only('Should be able to update bank file', () => {
+  it('Should be able to update cash on hand', () => {
     coh.searchKeyword()
     coh.updateCashOnHand()
   })  
 
-  // it('Should be able to search bank file', () => {
-  //   bankfile.searchKeyword()
-  // })
+  it.only('Should be able to search cash on hand', () => {
+    coh.searchKeyword()
+  })
 
   // it('Should be able to delete bank file', () => {
   //   bankfile.deleteBankFile()  
